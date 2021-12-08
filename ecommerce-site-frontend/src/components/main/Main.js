@@ -5,7 +5,7 @@ import Navbar from '../navbar/Navbar';
 import Pcontainer from '../pcontainer/Pcontainer'
 import '../main/styles.css'
 import PageHeading from '../pageheading/PageHeading'
-import Searchbar from '../searchbar/Searchbar';
+import Searchbar from '../searchbar/Searchbar'
 
 const Main = () => {
 
@@ -13,7 +13,7 @@ render()
 {
     return(
         <>
-            <Navbar/>
+            <Navbar user_name={"Arunav"} cart_item_count={3}/>
             <PageHeading content={"Latest Arrivals"}/>
             <Pcontainer/>
             <PageHeading content={"Latest in Electronics"}/>
