@@ -6,6 +6,9 @@ import Pcontainer from '../pcontainer/Pcontainer'
 import '../main/styles.css'
 import PageHeading from '../pageheading/PageHeading'
 import Searchbar from '../searchbar/Searchbar'
+import Storefront from '../../pages/storefront/Storefront';
+import Pdp from '../../pages/pdp/Pdp'
+
 
 const Main = () => {
 
@@ -13,14 +16,7 @@ render()
 {
     return(
         <>
-            <Navbar user_name={"Arunav"} cart_item_count={3}/>
-            <PageHeading content={"Latest Arrivals"}/>
-            <Pcontainer/>
-            <PageHeading content={"Latest in Electronics"}/>
-            <Pcontainer/>
-            <PageHeading content={"Latest in Home Decor"}/>
-            <Pcontainer/>
-            
+            <Pdp/>
         </>
     )
 }

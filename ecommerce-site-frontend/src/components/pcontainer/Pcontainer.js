@@ -5,7 +5,7 @@ import Navbar from '../navbar/Navbar';
 import Pcard from '../pcard/Pcard'
 import '../pcontainer/styles.css'
 
-const Pcontainer = () => {
+const Pcontainer = (props) => {
 
 render()
 {
