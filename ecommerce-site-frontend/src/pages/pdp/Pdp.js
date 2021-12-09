@@ -11,11 +11,7 @@ const Pdp = (props) =>{
     {
         return(
             <>
-            <Navbar user_name={"Arunav Dey"}/>
-            <PageHeading content={"All Products"}/>
-            <Pcontainer/>
-            <Pcontainer/>
-            <Pcontainer/>
+            
             </>
         )
     }

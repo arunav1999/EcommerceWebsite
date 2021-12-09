@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import '../pcard/styles.css'
+import '../../components/pageheading/styles.css'
 
 const PageHeading = (props) => {
 
