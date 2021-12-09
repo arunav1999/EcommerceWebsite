@@ -1,11 +1,21 @@
 import { render } from '@testing-library/react';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Router, Link, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar'
 import PageHeading from '../../components/pageheading/PageHeading'
 import Pcontainer from '../../components/pcontainer/Pcontainer'
 
-const Storefront = () => {
+const Storefront = (props) => {
+
+    const [products,setProducts] = useState([]);
+
+    useEffect(() => {
+        console.log('Fetching content')
+        fetch('/getProducts')
+            .then(response => response.json())
+            .then(products => setProducts(products));
+    }, []);
+
 
     render()
     {

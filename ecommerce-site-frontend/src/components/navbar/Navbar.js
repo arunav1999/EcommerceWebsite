@@ -1,16 +1,28 @@
-import { render } from '@testing-library/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css'
 import Autosuggest from 'react-autosuggest';
 import Searchbar from '../searchbar/Searchbar';
+import { getCartItems } from '../../utils/Cart'; 
+import { deleteFromCart } from '../../utils/Cart';
 
 
 const Navbar = (props) => {
 
+const [cartItems, setCartItems] = useState([]);
 
+const updateCartData = () =>{
+  
+  console.log("UPDATE CART DATA")
+  console.log("cart State",props.cartState)
+  const cart_items = getCartItems();
+  setCartItems(cart_items);
+  
+}
 
-render()
-{
+  useEffect(() => {
+    updateCartData();
+  },[props.cartState])
+
     return(
         <>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark cust_nav">
@@ -41,14 +53,20 @@ render()
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cart [{props.cart_item_count} Items]
+        <a onClick={updateCartData} class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Cart [{cartItems.length} Items]
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Product 1 Title (x1)&nbsp;  &nbsp; <span><a href="/remove"><i className="fa fa-trash"></i></a></span>&nbsp;&nbsp;<span><a href="/remove"><i className="fa fa-plus"></i></a></span>&nbsp;&nbsp;<span><a href="/remove"><i className="fa fa-minus"></i></a></span></a>
-          <a class="dropdown-item" href="#">Product 2 Title (x1)&nbsp;  &nbsp; <span><a href="/remove"><i className="fa fa-trash"></i></a></span>&nbsp;&nbsp;<span><a href="/remove"><i className="fa fa-plus"></i></a></span>&nbsp;&nbsp;<span><a href="/remove"><i className="fa fa-minus"></i></a></span></a>
-          <a class="dropdown-item" href="#">Product 3 Title (x1)&nbsp;  &nbsp; <span><a href="/remove"><i className="fa fa-trash"></i></a></span>&nbsp;&nbsp;<span><a href="/remove"><i className="fa fa-plus"></i></a></span>&nbsp;&nbsp;<span><a href="/remove"><i className="fa fa-minus"></i></a></span></a>
-          
+          {cartItems.map((item) => {
+            return <a class="dropdown-item" href={`/product/${item.product_id}`}>
+              {item.pname +" "+ item.quantity +" Price: Rs." +item.price}
+                &nbsp;  &nbsp; 
+                  <span>
+                    <a onClick={() => deleteFromCart(item.product_id)} href="javascript:void(0)">
+                      <i className="fa fa-trash"></i>
+                    </a>
+                  </span></a>
+          })}
         </div>
       </li>
     </ul>
@@ -61,7 +79,7 @@ render()
 </nav>
         </>
     )
-}
+
 
 }
 export default Navbar;
