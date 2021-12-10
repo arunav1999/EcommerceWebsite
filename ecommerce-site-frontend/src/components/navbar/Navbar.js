@@ -2,26 +2,27 @@ import React, { useEffect, useState } from 'react';
 import './styles.css'
 import Autosuggest from 'react-autosuggest';
 import Searchbar from '../searchbar/Searchbar';
-import { getCartItems } from '../../utils/Cart'; 
-import { deleteFromCart } from '../../utils/Cart';
+import { getCartItems, deleteFromCart, useCartItems} from '../../utils/Cart'; 
 
 
 const Navbar = (props) => {
 
-const [cartItems, setCartItems] = useState([]);
+const cartItems = useCartItems();
 
-const updateCartData = () =>{
+// const updateCartData = () =>{
   
-  console.log("UPDATE CART DATA")
-  console.log("cart State",props.cartState)
-  const cart_items = getCartItems();
-  setCartItems(cart_items);
   
-}
+ 
 
-  useEffect(() => {
-    updateCartData();
-  },[props.cartState])
+//   const cart_items = getCartItems();
+//   setCartItems(cart_items);
+ 
+  
+// }
+
+//   useEffect(() => {
+//     updateCartData();
+//   },[props.cartState])
 
     return(
         <>
@@ -53,7 +54,7 @@ const updateCartData = () =>{
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a onClick={updateCartData} class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Cart [{cartItems.length} Items]
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -66,7 +67,11 @@ const updateCartData = () =>{
                       <i className="fa fa-trash"></i>
                     </a>
                   </span></a>
+                  
           })}
+          
+          <button type="button" class="btn btn-success">Checkout</button>
+          
         </div>
       </li>
     </ul>

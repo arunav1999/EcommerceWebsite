@@ -3,20 +3,22 @@ import '../pcard/styles.css'
 import { addToCart } from '../../utils/Cart';
 
 
-const Pcard = (props) => {
-//{"/addItemToCart?id="+props.product_id+"&uid=xyz"}
-const [autoGenId,incrementId] = useState(0);
-
+const Pcard = ({
+    product_id,
+    price,
+    pname,
+    quanity,
+    description,
+    imglink
+}) => {
 const addDataToCart = () =>{
-    props.setCartState(props.cartState+1);
     const productInfo = {
-        cart_item_id:autoGenId,
-        product_id: props.product_id,
-        price:300,
-        pname:props.name,
-        quanity:3
+        product_id,
+        price,
+        pname,
+        quanity
     }
-    incrementId(autoGenId+1)
+    
     
     addToCart(productInfo);
 }
@@ -25,11 +27,11 @@ const addDataToCart = () =>{
     return(
         <>
             <div class="card">
-                <img class="card-img-top" src={props.imglink} alt="Card image cap"/>
+                <img class="card-img-top" src={imglink} alt="Card image cap"/>
                 <div class="card-body">
-                    <h5 class="card-title">{props.name}</h5>
-                    <p class="card-text">{props.description}</p>
-                    <h4>Price: Rs. {props.price} /-</h4>
+                    <h5 class="card-title"><a href="#">{pname}</a></h5>
+                    <p class="card-text">{description}</p>
+                    <h4>Price: Rs. {price} /-</h4>
                     <a onClick={addDataToCart} href="javascript:void(0)" class="btn btn-primary">Add to cart</a>
                 </div>
             </div>

@@ -1,0 +1,12 @@
+
+.card
+{
+    width: inherit;
+}
+.container
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 2vh;
+}

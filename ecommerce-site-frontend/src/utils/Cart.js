@@ -1,37 +1,44 @@
-const cartItems = {} 
+import { useEffect, useState } from "react";
+
+let setCartItems;
+let cartItems;
+
+export const useCartItems = () =>{
+    const [_cartItems, _setCartItems] = useState({})
+    cartItems = _cartItems;
+    setCartItems = _setCartItems;
+    
+    useEffect(() => {
+        const localCartItems = getCartItems();
+        setCartItems(localCartItems);
+    },[])
+    
+    return Object.values(cartItems);
+}
 
 export const getCartItems = () =>{
-
-    // return [
-    //     {
-    //         "cart_item_id":1,
-    //         "product_id":2,
-    //         "price":300,
-    //         "pname":"Apple iPhone 13 Pro Max",
-    //         "quanity":3
-    //     },
-    //     {
-    //         "cart_item_id":2,
-    //         "product_id":2,
-    //         "price":300,
-    //         "pname":"Apple iPhone 13 Pro Max",
-    //         "quanity":3
-    //     }
-    // ]
-    console.log("Object "+Object.values(cartItems))
-    return Object.values(cartItems);
-
+    const localCartItems = JSON.parse(localStorage.getItem("cartData")) || {};
+    
+    return localCartItems;
 }
 
 
 export const addToCart = (productInfo) =>{
+    const localCartItems = {...cartItems}
+
+    localCartItems[productInfo.product_id] = productInfo;
     
-    cartItems[productInfo.product_id] = productInfo;
-    
+    localStorage.setItem("cartData", JSON.stringify(localCartItems));
+    setCartItems(localCartItems);
 }
 
 export const deleteFromCart = (id) =>{
-    console.log('DELETE')
-    delete cartItems[id]
+
+    const localCartItems = {...cartItems}
+
+    delete localCartItems[id]
+    
+    localStorage.setItem("cartData", JSON.stringify(localCartItems));
+    setCartItems(localCartItems);
 }
 

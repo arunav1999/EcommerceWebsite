@@ -1,6 +1,6 @@
 products = [
         {
-            'id':1,
+            'product_id':1,
             'pname':"Samsung LED TV",
             'description':'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'stocks':"30",
@@ -19,7 +19,7 @@ products = [
             
         },
         {
-            'id':2,
+            'product_id':2,
             'pname':"Apple iPhone 13 Pro Max",
             'description':'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'stocks':"30",
@@ -38,7 +38,7 @@ products = [
             
         },
         {
-            'id':3,
+            'product_id':3,
             'pname':"Sony Bravia 32 inches TV",
             'description':'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'stocks':"30",
@@ -56,7 +56,7 @@ products = [
             'date_added':"2021-12-08 00:00:00"
             
         },{
-            'id':4,
+            'product_id':4,
             'pname':"Whirlpool Washing Machine",
             'description':'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'stocks':"30",
@@ -75,7 +75,7 @@ products = [
             
         },
         {
-            'id':5,
+            'product_id':5,
             'pname':"IFB 30 litres Oven",
             'description':'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'stocks':"30",
@@ -94,7 +94,7 @@ products = [
             
         },
         {
-            'id':6,
+            'product_id':6,
             'pname':"Apple Macbook Pro",
             'description':'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'stocks':"30",
@@ -113,7 +113,7 @@ products = [
             
         },
         {
-            'id':7,
+            'product_id':7,
             'pname':"Galaxy S21 Plus",
             'description':'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'stocks':"30",
@@ -207,7 +207,7 @@ users_info = [
         "admin":"true"
     },
     {
-        "user_id":2,
+        "user_product_id":2,
         "name":"Elon Musk",
         "mobile":"9870795570",
         "email":"elon.musk@spacex.com",

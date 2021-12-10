@@ -27,6 +27,8 @@ from tempDB import users_info
 
 """
 
+cart = []
+
 @app.route('/getProducts',methods=['GET'])
 def getProducts():
     return jsonify(products)
@@ -44,12 +46,34 @@ def getOrdersForUser():
 @app.route('/getCartItemsForUser',methods=['GET'])
 def getCartItemsForUser():
     user_id = request.args.get("id")
-    return jsonify(cart_items)
+    return jsonify(cart)
 
 @app.route('/getUserInfo',methods=['GET'])
 def getUserInfo():
     user_id = request.args.get("id")
     return jsonify(users_info[int(user_id)-1])
+
+@app.route('/addItemToCart',methods=['POST','GET'])
+def addItemToCart():
+    if(request.method == 'POST'):
+        data = request.json
+        cart.append(data)
+        print(cart)
+        return jsonify({'status':"OK"})
+    return jsonify({'status':'NOK'})
+
+@app.route('/removeItemFromCart',methods=['GET'])
+def removeItemFromCart():
+    user_id = request.args.get("uid")
+    product_id = request.args.get("pid")
+    for item in cart:
+        if(int(item['product_id']) == int(product_id)):
+            cart.remove(item)
+            break
+    print(cart)
+    return jsonify({'status':"OK"})
+
+    
 
 
 if __name__ =='__main__':
