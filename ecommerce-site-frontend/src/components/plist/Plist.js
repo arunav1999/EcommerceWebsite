@@ -1,6 +1,6 @@
 import React from 'react';
 import Pcard from '../pcard/Pcard'
-import './styles.css'
+import '../plist/styles.css'
 
 const Plist = ({
     products

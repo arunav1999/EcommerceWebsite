@@ -27,17 +27,17 @@ const cartItems = useCartItems();
     return(
         <>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark cust_nav">
-  <a class="navbar-brand" href="#">BuyItNow</a>
+  <a class="navbar-brand" href="/storefront">BuyItNow</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/storefront">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Categories</a>
+        <a class="nav-link" href="/plp">All Products</a>
       </li>
       
       <li class="nav-item dropdown">
@@ -46,7 +46,7 @@ const cartItems = useCartItems();
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Cart</a>
-          <a class="dropdown-item" href="#">Orders</a>
+          <a class="dropdown-item" href="/orders">Orders</a>
           <a class="dropdown-item" href="#">Profile</a>
           <a class="dropdown-item" href="#">Wishlist</a>
           <a class="dropdown-item" href="#">Signout</a>

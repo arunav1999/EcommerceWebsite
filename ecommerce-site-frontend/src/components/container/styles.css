@@ -1,12 +1,6 @@
-
-.card
-{
-    width: inherit;
-}
 .container
 {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    margin-top: 2vh;
+    margin-top:5vh;
+    height: 80vh;
+    overflow-y: scroll;
 }

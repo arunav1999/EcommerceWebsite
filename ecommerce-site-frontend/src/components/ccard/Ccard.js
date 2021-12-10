@@ -1,16 +1,22 @@
 import React from 'react';
+import '../container/Container'
+import './styles.css'
 
 const Ccard = (props) =>{
 
     return(
         <>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+            <div class="card-outer">
+                <div class="card-inner">
+                    <div>
+                        <img src="https://picsum.photos/120/120"></img>
+                    </div>
+                    <div>
+                        <h5>Some Product Name</h5>
+                        <h6>Total: Rs. 250</h6>
+                        <p>Date: 12th December 2021</p>
+                        <p>Order Status: Delivered</p>
+                    </div>
                 </div>
             </div>
         </>

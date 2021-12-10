@@ -4,6 +4,7 @@ import PageHeading from '../../components/pageheading/PageHeading';
 import Pcontainer from '../../components/pcontainer/Pcontainer';
 import '../../pages/pdp/styles.css'
 import Navbar from '../../components/navbar/Navbar'
+import Pcard from '../../components/pcard/Pcard';
 
 const Pdp = (props) =>{
 
@@ -11,7 +12,11 @@ const Pdp = (props) =>{
     {
         return(
             <>
-            
+                <div className="outer_container">
+                    <div className="inner_container">
+                        <Pcard/>
+                    </div>
+                </div>
             </>
         )
     }

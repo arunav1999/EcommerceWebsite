@@ -1,0 +1,22 @@
+.card-inner
+{
+   height: 1vh !important;
+   width: inherit !important;
+   display: flex !important;
+   flex-direction: row !important;
+   margin-top: 11px;
+   margin-bottom: 11px;
+   margin-left: 11px;
+}
+.card-inner > div
+{
+    margin: 5px;
+}
+.card-outer 
+{   
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    margin: 20px;
+    height: 13vh !important;
+    width: inherit !important;
+}

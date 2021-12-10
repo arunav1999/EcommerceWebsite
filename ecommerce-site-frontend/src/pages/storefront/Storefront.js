@@ -4,6 +4,7 @@ import { Router, Link, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar'
 import PageHeading from '../../components/pageheading/PageHeading'
 import Pcontainer from '../../components/pcontainer/Pcontainer'
+import Plist from '../../components/plist/Plist';
 
 const Storefront = (props) => {
 
@@ -21,13 +22,13 @@ const Storefront = (props) => {
     {
         return (
             <>
-                <Navbar user_name={"Arunav"} cart_item_count={3} />
+                
                 <PageHeading content={"Latest Arrivals"} />
-                <Pcontainer />
+                <Plist/>
                 <PageHeading content={"Latest in Electronics"} />
-                <Pcontainer />
+                <Plist/>
                 <PageHeading content={"Latest in Home Decor"} />
-                <Pcontainer />
+                <Plist/>
 
             </>
         )

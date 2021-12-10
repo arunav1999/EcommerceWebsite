@@ -12,6 +12,9 @@ const Container = (props) =>{
                     <Ccard/>
                     <Ccard/>
                     <Ccard/>
+                    <Ccard/>
+                    <Ccard/>
+                    <Ccard/>
                </div>
             </div> 
         </>
