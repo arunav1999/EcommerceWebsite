@@ -15,7 +15,7 @@ class Customers(db.Model):
     name = db.Column(db.String(100), unique=False, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(500), unique = False, nullable=False)
-    contact = db.Column(db.Integer, unique=False, nullable=False)
+    contact = db.Column(db.Integer, unique=True, nullable=False)
     address=db.Column(db.String(100), unique=False, nullable=False)
 
 
