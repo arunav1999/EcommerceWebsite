@@ -13,8 +13,12 @@ const UserProfile = () =>{
                 </div>
             </div>
             <div>
-                <div>Name: </div>
+                <PageHeading content={"Name: Arunav Dey "}/>
+                <PageHeading content={"Email: arunav.dey.7@gmail.com"}/>
+                <PageHeading content={"Contact: 9870794470"}/>
+                <PageHeading content={"Address: 240 Gyani Colony, Linepar, Moradabad, 244001"}/>
             </div>
+
         </>
     )
 

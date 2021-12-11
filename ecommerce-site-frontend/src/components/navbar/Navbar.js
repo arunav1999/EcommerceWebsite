@@ -45,9 +45,8 @@ const cartItems = useCartItems();
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/cart">Cart</a>
           <a class="dropdown-item" href="/orders">Orders</a>
-          <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Wishlist</a>
-          <a class="dropdown-item" href="#">Signout</a>
+          <a class="dropdown-item" href="/profile">Profile</a>
+          <a class="dropdown-item" href="/signout">Signout</a>
           
         </div>
       </li>

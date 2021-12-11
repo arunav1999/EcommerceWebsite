@@ -15,12 +15,12 @@ const Ccard = ({
         
         <div class="card-outer">
             <div class="card-inner">
-                <div>
-                    <img src={imglink}></img>
+                <div className="img_container">
+                    <img src={imglink} height="130" width="130"></img>
                 </div>
                 <div>
                     <h5>{pname}</h5>
-                    <h6>Total: {price}</h6>
+                    <h6>Total: Rs. {price}</h6>
                     <h6>Quantity: {quantity}</h6>
                     <button onClick={() => deleteFromCart(product_id)} type="button" class="btn btn-danger">Remove from Cart</button>
                 </div>

@@ -12,6 +12,7 @@ const Pdp = (props) =>{
     {
         return(
             <>
+                <PageHeading content={"Some Product Name"}/>
                 <div className="outer_container">
                     <div className="inner_container">
                         <Pcard/>

@@ -22,15 +22,19 @@ const getUserData = () =>{
     return localUser;
 }
 
-export const login = async (email, password) =>{
-    const res = await fetch('/loginsuccess', {
+export const login = async (email, password, isAdmin) =>{
+    
+    const res = await fetch('/api/login', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             email,
             password
         })
     });
-
+    
     const {
         success,
         user,
@@ -41,5 +45,7 @@ export const login = async (email, password) =>{
     {
         setUser(user);
         localStorage.setItem('userToken', token)
+        return true;
     }
+    return false;
 }
