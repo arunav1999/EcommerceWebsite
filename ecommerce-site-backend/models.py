@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:pass@localhost/testdb"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost/testdb"
 db = SQLAlchemy(app)
 
 
@@ -52,9 +52,6 @@ class Carts(db.Model):
     customer_id = db.Column(db.Integer,db.ForeignKey('customers.id'), unique=False, nullable=False)
     item_id = db.Column(db.Integer,db.ForeignKey('items.id'), unique=False, nullable=False)
     date=db.Column(db.Date, unique=False, nullable=False,default=datetime.datetime.utcnow)
-    quantity = db.Column(db.Integer, unique=False, nullable=False,default=1)
-
-
 
 # class Item_Category(db.Model):
 #     # you can even specify the table name with which you are working.

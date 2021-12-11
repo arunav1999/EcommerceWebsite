@@ -1,8 +1,7 @@
 from flask.json import jsonify
-from flask import app, request, make_response,Response,abort
-from flask.templating import render_template
+from flask import app, request
 from models import *
-import hashlib,jwt,requests
+import hashlib,jwt
 db.create_all()
 db.session.commit()
 
@@ -72,7 +71,7 @@ def getproductById(items_id):
         item['id']=Item.id
         item['name']=Item.name
         item['price']=Item.price
-        item['img_link']=Item.image_link
+        item['imglink']=Item.image_link
         item['description']=Item.description
         output.append(item)
     if output:    
@@ -91,7 +90,7 @@ def getproducts():
         item['id']=Item.id
         item['name']=Item.name
         item['price']=Item.price
-        item['img_link']=Item.image_link
+        item['imglink']=Item.image_link
         item['description']=Item.description
         output.append(item)
     if output:    
@@ -114,8 +113,9 @@ def getOrdersForUser():
                 obj={}
                 obj['name']=item.name
                 obj['price']=item.price
-                obj['img_link']=item.image_link
+                obj['imglink']=item.image_link
                 obj['description']=item.description
+                obj['date']=order.date
                 output.append(obj)
             return jsonify({"success":True, "order":output})
         else:
@@ -140,7 +140,7 @@ def getCartItemsForUser():
                 obj={}
                 obj['name']=item.name
                 obj['price']=item.price
-                obj['img_link']=item.image_link
+                obj['imglink']=item.image_link
                 obj['description']=item.description
                 output.append(obj)
             return jsonify({"success":True, "cart":output})
@@ -158,10 +158,10 @@ def createNewProduct():
         admin_check= Admin_Login.query.filter_by(email=decoded["email"], password=decoded['password']).first()
         if admin_check:
             data=request.get_json()
-            #val = Items(name=data['name'],price=data['price'],image_link=data['img_link'],description=data['description'])
-            i_id = Items.query.filter_by(name=data['name'],price=data['price'],image_link=data['img_link'],description=data['description']).first()
+            #val = Items(name=data['name'],price=data['price'],image_link=data['imglink'],description=data['description'])
+            i_id = Items.query.filter_by(name=data['name'],price=data['price'],image_link=data['imglink'],description=data['description']).first()
             if not i_id:
-                entry = Items(name=data['name'],price=data['price'],image_link=data['img_link'],description=data['description'])
+                entry = Items(name=data['name'],price=data['price'],image_link=data['imglink'],description=data['description'])
                 db.session.add(entry)
                 db.session.commit()
                 return jsonify({'success':True,'message':'item added successfully'})
