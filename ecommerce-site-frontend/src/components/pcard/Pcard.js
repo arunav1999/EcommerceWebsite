@@ -29,7 +29,7 @@ const addDataToCart = () =>{
             <div class="card">
                 <img class="card-img-top" src={imglink} alt="Card image cap"/>
                 <div class="card-body">
-                    <h5 class="card-title"><a href="#">{pname}</a></h5>
+                    <h5 class="card-title"><a href={"/pdp?product_id="+ product_id}>{pname}</a></h5>
                     <p class="card-text">{description}</p>
                     <h4>Price: Rs. {price} /-</h4>
                     <a onClick={addDataToCart} href="javascript:void(0)" class="btn btn-primary">Add to cart</a>

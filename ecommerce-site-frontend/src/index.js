@@ -6,6 +6,8 @@ import Plp from './pages/plp/Plp';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Storefront from './pages/storefront/Storefront';
 import Orders from './pages/orders/Orders';
+import Cart from './pages/cart/Cart'
+import Pdp from './pages/pdp/Pdp';
 
 ReactDOM.render(
   <React.Fragment>
@@ -21,6 +23,12 @@ ReactDOM.render(
             </Route>
             <Route path='/plp'>
               <Plp/>
+            </Route>
+            <Route path='/cart'>
+              <Cart/>
+            </Route>
+            <Route path='/pdp'>
+              <Pdp/>
             </Route>
           </Switch>
         </Router>

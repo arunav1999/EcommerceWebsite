@@ -1,6 +1,7 @@
 import React from 'react';
 import '../container/styles.css'
 import Ccard from '../ccard/Ccard';
+import Ocard from '../ocard/Ocard';
 
 const Container = (props) =>{
 
@@ -9,12 +10,12 @@ const Container = (props) =>{
         <>
            <div className="container">
                <div>
-                    <Ccard/>
-                    <Ccard/>
-                    <Ccard/>
-                    <Ccard/>
-                    <Ccard/>
-                    <Ccard/>
+                    <Ocard/>
+                    <Ocard/>
+                    <Ocard/>
+                    <Ocard/>
+                    <Ocard/>
+                    <Ocard/>
                </div>
             </div> 
         </>

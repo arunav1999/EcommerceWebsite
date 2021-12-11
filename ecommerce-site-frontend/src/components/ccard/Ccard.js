@@ -14,8 +14,8 @@ const Ccard = (props) =>{
                     <div>
                         <h5>Some Product Name</h5>
                         <h6>Total: Rs. 250</h6>
-                        <p>Date: 12th December 2021</p>
-                        <p>Order Status: Delivered</p>
+                        <h6>Quantity: 1</h6>
+                        <button type="button" class="btn btn-danger">Remove from Cart</button>
                     </div>
                 </div>
             </div>
