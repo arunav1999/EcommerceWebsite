@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:pass@localhost/searchsample"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:pass@localhost/testdb"
 db = SQLAlchemy(app)
 
 
@@ -15,7 +15,7 @@ class Customers(db.Model):
     name = db.Column(db.String(100), unique=False, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(500), unique = False, nullable=False)
-    contact = db.Column(db.Text, unique=True, nullable=False)
+    contact = db.Column(db.Text, unique=False, nullable=False)
     address=db.Column(db.String(100), unique=False, nullable=False)
 
 
@@ -28,12 +28,12 @@ class Items(db.Model):
     image_link=db.Column(db.String(300), unique=False, nullable=False)
     description=db.Column(db.String(100), unique=False, nullable=True)
 
-class Categories(db.Model):
-    # you can even specify the table name with which you are working.
-    __tablename__ = 'categories'
-    id = db.Column(db.Integer, primary_key = True, unique=True, nullable=False)
-    name = db.Column(db.String(100), unique=False, nullable=False)
-    description=db.Column(db.String(100), unique=False, nullable=True)
+# class Categories(db.Model):
+#     # you can even specify the table name with which you are working.
+#     __tablename__ = 'categories'
+#     id = db.Column(db.Integer, primary_key = True, unique=True, nullable=False)
+#     name = db.Column(db.String(100), unique=False, nullable=False)
+#     description=db.Column(db.String(100), unique=False, nullable=True)
 
 
 class Orders(db.Model):
@@ -56,11 +56,11 @@ class Carts(db.Model):
 
 
 
-class Item_Category(db.Model):
-    # you can even specify the table name with which you are working.
-    __tablename__ = 'item_category'
-    item_id = db.Column(db.Integer,db.ForeignKey('items.id'), unique=False, nullable=False,primary_key=True)
-    category_id = db.Column(db.Integer,db.ForeignKey('categories.id'), unique=False, nullable=False,primary_key=True)
+# class Item_Category(db.Model):
+#     # you can even specify the table name with which you are working.
+#     __tablename__ = 'item_category'
+#     item_id = db.Column(db.Integer,db.ForeignKey('items.id'), unique=False, nullable=False,primary_key=True)
+#     category_id = db.Column(db.Integer,db.ForeignKey('categories.id'), unique=False, nullable=False,primary_key=True)
 
 
 

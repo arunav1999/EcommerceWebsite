@@ -1,5 +1,3 @@
-
-
 from flask.json import jsonify
 from flask import app, request, make_response,Response,abort
 from flask.templating import render_template
@@ -8,71 +6,64 @@ import hashlib,jwt,requests
 db.create_all()
 db.session.commit()
 
-
-
 key='super-secret'
 
-@app.route('/registersuccess', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def registersuccess():
-    if not request.json or not 'email' in request.json:
-        abort(400)
-    data=request.get_json()
-    password=data['password']
-    hashpass= hashlib.md5(bytes(str(password),encoding ='utf-8')).hexdigest()
-    email = data['email']
-    name=data['name']
-    contact=data['contact']
-    address=data['address']
-    user_check= Customers.query.filter_by(email=email).first()
-    if not user_check:
-        entry = Customers(name=data['name'],email=data['email'],password=hashpass,contact=data['contact'],address=data['address'])
-        db.session.add(entry)
-        db.session.commit()
-        return jsonify({'success':True,'message':'Registration Successful'})
-    else:
-        return jsonify({'success':False,'message':'User Already Existed'}) 
-    return jsonify({'success':False,'message':'Registration Failed','error_code':404})
+    try:    
+        data=request.get_json()
+        password=data['password']
+        hashpass= hashlib.md5(bytes(str(password),encoding ='utf-8')).hexdigest()
+        user_check= Customers.query.filter_by(email=data['email']).first()
+        if not user_check:
+            entry = Customers(name=data['name'],email=data['email'],password=hashpass,contact=data['contact'],address=data['address'])
+            db.session.add(entry)
+            db.session.commit()
+            return jsonify({'success':True,'message':'Registration Successful'})
+        else:
+            return jsonify({'success':False,'message':'User Already Existed for this email'}), 404 
+    except Exception as e:
+        return jsonify({'success':False,'message':'not recieved JSON data'}),400
+    
 
 
-@app.route('/loginsuccess', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def loginSucess():
-    if request.method == 'POST':
+    try:
         all_data=request.get_json()
         hashedPassword = hashlib.md5(bytes(str(all_data['password']),encoding='utf-8'))
         hashedPassword = hashedPassword.hexdigest()
-        result = db.session.query(Customers).filter(Customers.email==all_data['email'], Customers.password==hashedPassword)
-        payload={"email":all_data['email'],"password":hashedPassword }
-        value = jwt.encode(payload, key)
+        result = Customers.query.filter_by(email=all_data['email'], password=hashedPassword).first()
+        if result:
+            payload={"email":all_data['email'],"password":hashedPassword }
+            value = jwt.encode(payload, key)
+            #user_info
+            user_info={'name':result.name,'email':result.email,'contact':result.contact,'address':result.address}
+            return jsonify({'success':True,'token':value.decode('utf-8'), 'user_info':user_info})
         #value = jwt.decode(token, options={"verify_signature": False})
-        for row in result:
-            if (len(row.email)!=0):
-                return jsonify({'success':True,'token':value.decode('utf-8')})
-            else:
-                return jsonify({'success':False,'message':'Wrong Password'})
-    return jsonify({'success':False,'message':'Failed','error_code':404})
+        else:
+            return jsonify({'success':False,'message':'invalid email/Password'}), 404
+    except:
+        return jsonify({'success':False,'message':'not recieved JSON data'}),400
 
 
-@app.route('/adminloginsuccess',methods=['POST'])
+@app.route('/api/adminlogin',methods=['POST'])
 def adminLoginSuccess():
-    if request.method == 'POST':
+    try:
         all_data=request.get_json()
-        #hashedPassword = hashlib.md5(bytes(str(all_data['password']),encoding='utf-8'))
-        #hashedPassword = hashedPassword.hexdigest()
-        result = db.session.query(Admin_Login).filter(Admin_Login.email==all_data['email'], Admin_Login.password==all_data['password'])
-        payload={"email":all_data['email'],"password":all_data['password'] }
-        value = jwt.encode(payload, key)
-        # print (token)
-        # value = jwt.decode(token, options={"verify_signature": False})
-        for row in result:
-            if (len(row.email)!=0):
-                return jsonify({'success':True,'token':value})
-            else:
-                return jsonify({'success':False,'message':'Wrong Password'})
-    return jsonify({'success':False,'message':'Failed','error_code':404})
+        result = Admin_Login.query.filter_by(email=all_data['email'], password=all_data['password']).first()
+        if result:
+            payload={"email":all_data['email'],"password":all_data['password'] }
+            value = jwt.encode(payload, key).decode('UTF-8')
+            return jsonify({'success':True,'token':value})
+        else:
+            return jsonify({'success':False,'message':'Wrong Password'}), 404
+    except:
+        return jsonify({'success':False,'message':'not recieved JSON data'}), 400
 
 
 
-@app.route('/getproductById/<int:items_id>',methods=['GET'])
+@app.route('/api/getproductById/<int:items_id>',methods=['GET'])
 def getproductById(items_id):
     result = db.session.query(Items).filter(Items.id==items_id)
     output=[]     
@@ -91,7 +82,7 @@ def getproductById(items_id):
 
 
 
-@app.route('/getproducts',methods=['GET'])
+@app.route('/api/getproducts',methods=['GET'])
 def getproducts():
     result = db.session.query(Items).all()
     output=[]    
@@ -109,61 +100,65 @@ def getproducts():
         return jsonify({'success':False,'message':'Product is not present'})    
     
 
-@app.route('/getOrdersForUser',methods=['GET'])
+@app.route('/api/getOrdersForUser',methods=['GET'])
 def getOrdersForUser():
-    token=request.headers['token']
-    value = jwt.decode(token, options={"verify_signature": False})
-    res = db.session.query(Customers).filter(Customers.email==value['email'])
-    if res:
-        for it in res:
-            result = db.session.query(Orders).filter(Orders.customer_id==it.id)
-        output=[]
-        
-        for Order in result:
-            item = {}
-            item['id']=Order.id
-            item['customer_id']=Order.customer_id
-            item['item_id']=Order.item_id
-            item['date']=Order.date
-            output.append(item)
-        return jsonify(output)
-    else:
-        return jsonify({'success':False,'message':'Customer is not Authorised'})
+    try:
+        token=request.headers['token']
+        value = jwt.decode(token, options={"verify_signature": False})
+        res = Customers.query.filter_by(email=value['email'], password=value['password']).first()
+        if res:
+            result = Orders.query.filter_by(customer_id=res.id).all()
+            output=[]
+            for order in result:
+                item = Items.query.filter_by(id=order.item_id).first()
+                obj={}
+                obj['name']=item.name
+                obj['price']=item.price
+                obj['img_link']=item.image_link
+                obj['description']=item.description
+                output.append(obj)
+            return jsonify({"success":True, "order":output})
+        else:
+            return jsonify({'success':False,'message':'invalid email/password'}), 404
+    except:
+        return jsonify({'success':False,'message':'Request misses token/json data'}), 400
+    
 
 
-@app.route('/getCartItemsForUser',methods=['GET'])
+@app.route('/api/getCartItemsForUser',methods=['GET'])
 def getCartItemsForUser():
-    token=request.headers['token']
-    value = jwt.decode(token, options={"verify_signature": False})
-    res = db.session.query(Customers).filter(Customers.email==value['email'])
-    if res:
-        for it in res:
-            result = db.session.query(Carts).filter(it.id==Carts.customer_id)
-        output=[]
-        
-        for Item in result:
-            item = {}
-            item['id']=Item.id
-            item['customer_id']=Item.customer_id
-            item['item_id']=Item.item_id
-            item['date']=Item.date
-            item['quantity']=Item.quantity
-            output.append(item)
-        return jsonify(output)
-    else:
-        return jsonify({'success':False,'message':'Customer is not Authorised'})
+    try:
+        token=request.headers['token']
+        value = jwt.decode(token, options={"verify_signature": False})
+        res = Customers.query.filter_by(email=value['email'], password=value['password']).first()
+        if res:
+            result = Carts.query.filter_by(customer_id=res.id).all()
+            output=[]
+            
+            for cart in result:
+                item = Items.query.filter_by(id=cart.item_id).first()
+                obj={}
+                obj['name']=item.name
+                obj['price']=item.price
+                obj['img_link']=item.image_link
+                obj['description']=item.description
+                output.append(obj)
+            return jsonify({"success":True, "cart":output})
+        else:
+            return jsonify({'success':False,'message':'invalid email/password'}), 404
+    except:
+        return jsonify({'success':False,'message':'Request misses token/json data'}), 400
 
     
-@app.route('/createNewProduct',methods=['POST'])
+@app.route('/api/createNewProduct',methods=['POST'])
 def createNewProduct():
-    token = request.headers['token']
-    decoded = jwt.decode(token, options={"verify_signature": False})
-    email=decoded["email"]
-    user_check= Admin_Login.query.filter_by(email=email).first()
-    if user_check:
-        if request.method == 'POST':
+    try:
+        token = request.headers['token']
+        decoded = jwt.decode(token, options={"verify_signature": False})
+        admin_check= Admin_Login.query.filter_by(email=decoded["email"], password=decoded['password']).first()
+        if admin_check:
             data=request.get_json()
-            val = Items(name=data['name'],price=data['price'],image_link=data['img_link'],description=data['description'])
+            #val = Items(name=data['name'],price=data['price'],image_link=data['img_link'],description=data['description'])
             i_id = Items.query.filter_by(name=data['name'],price=data['price'],image_link=data['img_link'],description=data['description']).first()
             if not i_id:
                 entry = Items(name=data['name'],price=data['price'],image_link=data['img_link'],description=data['description'])
@@ -171,94 +166,60 @@ def createNewProduct():
                 db.session.commit()
                 return jsonify({'success':True,'message':'item added successfully'})
             else:
-                return jsonify({'success':False,'message':'item already present'})
-        return jsonify({'success':False,'message':'Failed','error_code':404})
-    else:
-        jsonify({'success':False,'message':'Admin is not Authorised'})
+                return jsonify({'success':False,'message':'item already present'}), 404
+        else:
+            return jsonify({'success':False,'message':'Not Authorised'}), 404
+    except:
+        return jsonify({'success':False,'message':'Request misses token/json data'}), 400
 
 
-@app.route('/addItemToCart',methods=['POST'])
+@app.route('/api/updateCart',methods=['POST'])
 def addItemToCart():
-    token=request.headers['token']
-    value = jwt.decode(token, options={"verify_signature": False})
-    res = db.session.query(Customers).filter(Customers.email==value['email'])
-    if res:
-
-        if request.method == 'POST':
+    try:
+        token=request.headers['token']
+        value = jwt.decode(token, options={"verify_signature": False})
+        hashedPassword = hashlib.md5(bytes(str(value['password']),encoding='utf-8'))
+        hashedPassword = hashedPassword.hexdigest()
+        res = Customers.query.filter_by(email=value['email'], password=value['password']).first()
+        if res:
             data=request.get_json()
-        
-            for ig in res:
-                db.session.query(Carts).filter_by(customer_id=ig.id).delete()
+            db.session.query(Carts).filter_by(customer_id=res.id).delete()
+            db.session.commit()
+            for it in data:
+                entry = Carts(customer_id=res.id,item_id=it['item_id'])
+                db.session.add(entry)
                 db.session.commit()
-            for ig in res:
-                for it in data:
-                    entry = Carts(customer_id=ig.id,item_id=it['item_id'])
-                    db.session.add(entry)
-                    db.session.commit()
-            return jsonify({'success':True,'message':'items added successfully'})
-        # else:
-        #     h = Carts.query.filter_by(item_id=data['product_id'],customer_id=data['user_id']).update({Carts.quantity:1+Carts.quantity})
-        #     db.session.commit()
-        #     return jsonify({'success':False,'message':'item incremented successfully'})
-        return jsonify({'success':False,'message':'Failed','error_code':404})
-    else:
-        return jsonify({'success':False,'message':'Customer is not Authorised'})
+            return jsonify({'success':True,'message':'cart updated successfully'})
+        else:
+            return jsonify({'success':False,'message':'invalid email/password'}), 404
+    except:
+        return jsonify({'success':False,'message':'Request misses token/json data'}), 400
 
 
-@app.route('/placeOrder',methods=['POST'])
+@app.route('/api/placeOrder',methods=['POST'])
 def placeOrder():
-    token=request.headers['token']
-    value = jwt.decode(token, options={"verify_signature": False})
-    res = db.session.query(Customers).filter(Customers.email==value['email'])
-    if res:
-
-        if request.method == 'POST':
+    try:
+        token=request.headers['token']
+        value = jwt.decode(token, options={"verify_signature": False})
+        hashedPassword = hashlib.md5(bytes(str(value['password']),encoding='utf-8'))
+        hashedPassword = hashedPassword.hexdigest()
+        res = Customers.query.filter_by(email=value['email'], password=value['password']).first()
+        if res:
             data=request.get_json()
-            for ig in res:
-                db.session.query(Carts).filter_by(customer_id=ig.id).delete()
+            db.session.query(Carts).filter_by(customer_id=res.id).delete()
+            db.session.commit()
+            for it in data:
+                entry = Orders(customer_id=res.id,item_id=it['item_id'])
+                db.session.add(entry)
                 db.session.commit()
-            for ig in res:
-                for it in data:
-                    entry = Orders(customer_id=ig.id,item_id=it['item_id'])
-                    db.session.add(entry)
-                    db.session.commit()
-            return jsonify({'success':True,'message':'items ordered successfully'})
-        # else:
-        #     h = Carts.query.filter_by(item_id=data['product_id'],customer_id=data['user_id']).update({Carts.quantity:1+Carts.quantity})
-        #     db.session.commit()
-        #     return jsonify({'success':False,'message':'item incremented successfully'})
-        return jsonify({'success':False,'message':'Failed','error_code':404})
-    else:
-        return jsonify({'success':False,'message':'Customer is not Authorised'})
-
-
-
-# @app.route('/removeItemFromCart',methods=["DELETE"])
-# def removeItemFromCart():
-#     token = request.headers['token']
-#     decoded = jwt.decode(token, options={"verify_signature": False})
-#     email=decoded["email"]
-#     user_check= Customers.query.filter_by(email=email).first()
-#     if user_check:
-#         data=request.get_json()
-#         user_check= Carts.query.filter_by(customer_id=data['user_id'],item_id=data['product_id']).first()
-#         if  user_check:
-#             #entry = itemcart(user_id= user_id,product_id=product_id,product_name=product_name)
-#             db.session.query(Carts).filter_by(customer_id=data['user_id'],item_id=data['product_id']).delete()
-#             db.session.commit()
-#             return jsonify({'success':True,'message':'item remove succefully'})
-#         else:
-#             return jsonify({'success':False,'message':'item is not present'}) 
-#         return jsonify({'success':False,'message':'Failed','error_code':404})
-#     else:
-#         jsonify({'success':False,'message':'Customer is not Authorised'})        
-
+            return jsonify({'success':True,'message':'Order placed successfully'})
+        else:
+            return jsonify({'success':False,'message':'invalid email/password'}), 404
+    except:
+        return jsonify({'success':False,'message':'Request misses token/json data'}), 400
 
 
 if __name__ == "__main__":
     app.run(debug=True, port=7000)
 
-#logging -> reference https://www.askpython.com/python-modules/flask/flask-logging
-# Five levels of debugging
-# debug, info, warning, error, critical
 
