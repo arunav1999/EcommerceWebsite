@@ -67,9 +67,9 @@ const cartItems = useCartItems();
                   </span></a>
                   
           })}
-          
-          <button type="button" class="btn btn-success">Checkout</button>
-          
+          <a href="/cart">
+            <button type="button" class="btn btn-success">Checkout</button>
+          </a>
         </div>
       </li>
     </ul>

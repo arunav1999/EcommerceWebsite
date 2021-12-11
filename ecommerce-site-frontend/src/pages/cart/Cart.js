@@ -8,6 +8,7 @@ const Cart = (props) =>{
         <>
             <PageHeading content={"All Cart Items"}/>
             <CContainer/>
+            <button type="button" class="btn btn-success">Buy Now</button>
         </>
     )
 }

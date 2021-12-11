@@ -8,6 +8,7 @@ import Storefront from './pages/storefront/Storefront';
 import Orders from './pages/orders/Orders';
 import Cart from './pages/cart/Cart'
 import Pdp from './pages/pdp/Pdp';
+import UserProfile from './pages/userprofile/UserProfile';
 
 ReactDOM.render(
   <React.Fragment>
@@ -29,6 +30,9 @@ ReactDOM.render(
             </Route>
             <Route path='/pdp'>
               <Pdp/>
+            </Route>
+            <Route path='/profile'>
+              <UserProfile/>
             </Route>
           </Switch>
         </Router>
