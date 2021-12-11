@@ -7,7 +7,6 @@ const Pcard = ({
     product_id,
     price,
     pname,
-    quanity,
     description,
     imglink
 }) => {
@@ -16,7 +15,8 @@ const addDataToCart = () =>{
         product_id,
         price,
         pname,
-        quanity
+        quantity: 1,
+        imglink
     }
     
     

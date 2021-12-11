@@ -1,26 +1,33 @@
 import React from 'react';
 import '../container/Container'
 import './styles.css'
+import {deleteFromCart} from '../../utils/Cart'
 
-const Ccard = (props) =>{
+const Ccard = ({
+    pname,
+    price,
+    quantity,
+    product_id,
+    imglink
+}) =>{
 
     return(
-        <>
-            <div class="card-outer">
-                <div class="card-inner">
-                    <div>
-                        <img src="https://picsum.photos/120/120"></img>
-                    </div>
-                    <div>
-                        <h5>Some Product Name</h5>
-                        <h6>Total: Rs. 250</h6>
-                        <h6>Quantity: 1</h6>
-                        <button type="button" class="btn btn-danger">Remove from Cart</button>
-                    </div>
+        
+        <div class="card-outer">
+            <div class="card-inner">
+                <div>
+                    <img src={imglink}></img>
+                </div>
+                <div>
+                    <h5>{pname}</h5>
+                    <h6>Total: {price}</h6>
+                    <h6>Quantity: {quantity}</h6>
+                    <button onClick={() => deleteFromCart(product_id)} type="button" class="btn btn-danger">Remove from Cart</button>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    )    
+    
 
 }
 export default Ccard;

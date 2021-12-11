@@ -3,18 +3,20 @@ import React from 'react';
 import '../container/styles.css'
 import Ccard from '../ccard/Ccard';
 
-const CContainer = (props) =>{
+const CContainer = ({
+    cartItems
+}) =>{
 
     
     return(
         <>
            <div className="container">
                <div>
-                    <Ccard/>
-                    <Ccard/>
-                    <Ccard/>
-                    <Ccard/>
-                    <Ccard/>
+                   {
+                    cartItems.map((cartItem) => {
+                        return <Ccard {...cartItem} />
+                    })
+                   }
                </div>
             </div> 
         </>
