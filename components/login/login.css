@@ -1,0 +1,32 @@
+.form{
+    background-color: rgb(4, 2, 22);
+    width: 30%;
+    text-align: center;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    color: azure;
+    box-sizing: border-box;
+    padding: 3%;
+    border-radius: 10%;
+}
+
+input{
+    border-radius: 8px;
+}
+
+header{
+    text-align: center;
+    background-color: azure;
+    color:rgb(4, 2, 22);
+    padding: 3%;
+}
+
+#loggedin{
+    text-align: center;
+    color: azure;
+    background-color:rgb(4, 2, 22);
+    padding-top: 5%;
+    padding-bottom: 30%;
+}
+
