@@ -7,6 +7,11 @@ db.session.commit()
 
 key='super-secret'
 
+#No route for admin register or check for admin register
+
+
+
+
 @app.route('/api/register', methods=['POST'])
 def registersuccess():
     try:    
@@ -42,7 +47,7 @@ def loginSucess():
         #value = jwt.decode(token, options={"verify_signature": False})
         else:
             return jsonify({'success':False,'message':'invalid email/Password'}), 404
-    except:
+    except Exception as e:
         return jsonify({'success':False,'message':'not recieved JSON data'}),400
 
 
@@ -68,8 +73,8 @@ def getproductById(items_id):
     output=[]     
     for Item in result:
         item = {}
-        item['id']=Item.id
-        item['name']=Item.name
+        item['product_id']=Item.id
+        item['pname']=Item.name
         item['price']=Item.price
         item['imglink']=Item.image_link
         item['description']=Item.description
@@ -87,8 +92,8 @@ def getproducts():
     output=[]    
     for Item in result:
         item = {}
-        item['id']=Item.id
-        item['name']=Item.name
+        item['product_id']=Item.id
+        item['pname']=Item.name
         item['price']=Item.price
         item['imglink']=Item.image_link
         item['description']=Item.description
@@ -138,10 +143,11 @@ def getCartItemsForUser():
             for cart in result:
                 item = Items.query.filter_by(id=cart.item_id).first()
                 obj={}
-                obj['name']=item.name
+                obj['pname']=item.name
                 obj['price']=item.price
                 obj['imglink']=item.image_link
                 obj['description']=item.description
+                obj['product_id']=item.id
                 output.append(obj)
             return jsonify({"success":True, "cart":output})
         else:
@@ -218,8 +224,36 @@ def placeOrder():
     except:
         return jsonify({'success':False,'message':'Request misses token/json data'}), 400
 
+@app.route('/api/userinfo',methods=['GET'])
+def verifyToken():
+    try:
+        token=request.headers['token']
+        value = jwt.decode(token, options={"verify_signature": False})
+        result = Customers.query.filter_by(email=value['email']).first()
+        user_info={'name':result.name,'email':result.email,'contact':result.contact,'address':result.address}
+        return jsonify({"success":True, "user_info":user_info})
+    except:
+        return jsonify({'success':False,'message':'Request misses token/json data'}), 400
 
-if __name__ == "__main__":
-    app.run(debug=True, port=7000)
+@app.route('/api/getCartTotalForUser',methods=['GET'])
+def getCartTotalForUser():
+    try:
+        token=request.headers['token']
+        value = jwt.decode(token, options={"verify_signature": False})
+        res = Customers.query.filter_by(email=value['email'], password=value['password']).first()
+        if res:
+            result = Carts.query.filter_by(customer_id=res.id).all()
+            total = 0
+            for cart in result:
+                item = Items.query.filter_by(id=cart.item_id).first()
+                total+= int(item.price)
+            return jsonify({"success":True, "total":total})
+        else:
+            return jsonify({'success':False,'message':'invalid email/password'}), 404
+    except:
+        return jsonify({'success':False,'message':'Request misses token/json data'}), 400
 
+
+# if __name__ == "__main__":
+#     app.run(debug=True, port=7000)
 
