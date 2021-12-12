@@ -1,0 +1,18 @@
+.search_bar
+{
+   border: 1px solid green;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   padding-top: 5vh;
+}
+.search_bar_container
+{
+    display: flex;
+    justify-content: center;
+}
+.suggestion_card
+{
+    background-color: white;
+    border: 1px solid black;
+}
