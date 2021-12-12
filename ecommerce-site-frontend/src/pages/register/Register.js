@@ -1,28 +1,60 @@
 import React, {useState, useEffect} from 'react';
+import {toast} from 'react-toastify';
+
 import PageHeading from '../../components/pageheading/PageHeading';
+import {signup} from '../../utils/Auth'
+
 import './styles.css'
 
+const defaultUserInfo = {
+    name:'',
+    email:'',
+    contact:'',
+    address:'',
+    password:''
+}
+const validateUserInfo = (userInfo) =>{
+    return true
+}
 
 const Register = () =>{
+    const [userInfo, setUserInfo] = useState(defaultUserInfo)
+    const {
+        name,
+        email,
+        contact,
+        address,
+        password
+    } = userInfo
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [isAdmin, setIsAdmin] = useState(false)
-    
-    const handleEmailChange = event => {
-        setEmail(event.target.value)
-    };
-    const handlePasswordChange = event => {
-        setPassword(event.target.value)
-    };
-    const handleIsAdminChange = event => {
-        setIsAdmin(event.target.checked)
-    };
+    const handleChange = (event) =>{
+        const localUserInfo = {...userInfo, [event.target.name]: event.target.value}
+
+        setUserInfo(localUserInfo)
+    } 
 
     const handleSubmit = event => {
         event.preventDefault();
-        //Code
-        
+
+        if(validateUserInfo(userInfo))
+        {
+            signup(userInfo)
+                .then((signupSuccess) => {
+                    if(signupSuccess)
+                    {
+                        setUserInfo(defaultUserInfo)
+                        toast('Registration successful');
+                    }
+                    else
+                    {
+                        toast("Registration failed !");
+                    }
+                })
+        }
+        else
+        {
+            toast('Info not valid !')
+        }
     };
 
 
@@ -34,32 +66,24 @@ const Register = () =>{
                 <form onSubmit={handleSubmit} >
                     <div class="form-group">
                         <label for="exampleInputEmail1">Name</label>
-                        <input onChange={handleEmailChange} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter full name"/>
+                        <input name="name" onChange={handleChange} type="text" class="form-control"  placeholder="Enter full name" value={name}/>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input onChange={handleEmailChange} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                        <input name="email" onChange={handleChange} type="email" class="form-control"  placeholder="Enter email"  value={email}/>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input onChange={handlePasswordChange} type="password" class="form-control" id="exampleInputPassword1" placeholder="Set a password"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input onChange={handlePasswordChange} type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password again"/>
+                        <input name="password" onChange={handleChange} type="password" class="form-control"  placeholder="Set a password"  value={password}/>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Contact</label>
-                        <input onChange={handlePasswordChange} type="number" class="form-control" id="exampleInputPassword1" placeholder="Contact"/>
+                        <input name="contact" onChange={handleChange} type="number" class="form-control" placeholder="Contact"  value={contact}/>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Address</label>
-                        <input onChange={handlePasswordChange} type="number" class="form-control" id="exampleInputPassword1" placeholder="Address"/>
-                    </div>
-                    <div class="form-check">
-                        <input onChange={handleIsAdminChange} type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                        <label class="form-check-label" for="exampleCheck1">I will be an Admin</label>
+                        <input name="address" onChange={handleChange} type="text" class="form-control"  placeholder="Address"  value={address}/>
                     </div>
                     <button type="submit" class="btn btn-primary">Register</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;

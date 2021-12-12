@@ -4,9 +4,11 @@ import PageHeading from '../../components/pageheading/PageHeading';
 import CContainer from '../../components/Ccontainer/Ccontainer';
 import {useCartItems} from '../../utils/Cart'
 import '../../pages/cart/styles.css'
+import {addToOrder} from '../../utils/Orders'
 
 const Cart = (props) =>{
     const cartItems = useCartItems();
+    
 
     return(
         <React.Fragment>

@@ -28,7 +28,7 @@ const AdminPanel = () =>{
 
     return(
         <>
-        <PageHeading content={"Login"}/>
+        <PageHeading content={"Admin Panel: Add a Product"}/>
         <div className="inp_outer_container">
             <div className="inp_inner_container">
                 <form onSubmit={handleSubmit} >

@@ -3,19 +3,20 @@ import '../container/styles.css'
 import Ccard from '../ccard/Ccard';
 import Ocard from '../ocard/Ocard';
 
-const Container = (props) =>{
+const Container = ({
+    orderItems
+}) =>{
 
     
     return(
         <>
            <div className="container">
                <div>
-                    <Ocard/>
-                    <Ocard/>
-                    <Ocard/>
-                    <Ocard/>
-                    <Ocard/>
-                    <Ocard/>
+               {
+                    orderItems.map((orderItem) => {
+                        return <Ocard {...orderItem} />
+                    })
+                   }
                </div>
             </div> 
         </>

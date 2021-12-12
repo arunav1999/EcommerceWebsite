@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../pcard/styles.css'
 import { addToCart } from '../../utils/Cart';
-
+import { useAuth } from '../../utils/Auth'; 
 
 const Pcard = ({
     product_id,
@@ -10,6 +10,7 @@ const Pcard = ({
     description,
     imglink
 }) => {
+const userInfo = useAuth()
 const addDataToCart = () =>{
     const productInfo = {
         product_id,
@@ -19,8 +20,7 @@ const addDataToCart = () =>{
         imglink
     }
     
-    
-    addToCart(productInfo);
+    addToCart(userInfo.token, productInfo);
 }
 
 

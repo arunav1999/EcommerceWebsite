@@ -2,30 +2,16 @@ import React, { useEffect, useState } from 'react';
 import './styles.css'
 import Autosuggest from 'react-autosuggest';
 import Searchbar from '../searchbar/Searchbar';
-import { getCartItems, deleteFromCart, useCartItems} from '../../utils/Cart'; 
-
+import { deleteFromCart, useCartItems} from '../../utils/Cart'; 
+import { useAuth } from '../../utils/Auth'; 
 
 const Navbar = (props) => {
-
+const userInfo = useAuth();
+console.info('USer Info in Navbar', userInfo)
 const cartItems = useCartItems();
 
-// const updateCartData = () =>{
-  
-  
- 
-
-//   const cart_items = getCartItems();
-//   setCartItems(cart_items);
- 
-  
-// }
-
-//   useEffect(() => {
-//     updateCartData();
-//   },[props.cartState])
-
     return(
-        <>
+        
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark cust_nav">
   <a class="navbar-brand" href="/plp">BuyItNow</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,12 +23,14 @@ const cartItems = useCartItems();
         <a class="nav-link" href="/plp">Home <span class="sr-only">(current)</span></a>
       </li>
       
-      
+      { userInfo !== null &&
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {props.user_name}
+          {userInfo.name}
         </a>
+        
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          
           <a class="dropdown-item" href="/cart">Cart</a>
           <a class="dropdown-item" href="/orders">Orders</a>
           <a class="dropdown-item" href="/profile">Profile</a>
@@ -50,6 +38,8 @@ const cartItems = useCartItems();
           
         </div>
       </li>
+      }
+      {userInfo !== null &&
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Cart [{cartItems.length} Items]
@@ -60,7 +50,10 @@ const cartItems = useCartItems();
               {item.pname +" "+ item.quantity +" Price: Rs." +item.price}
                 &nbsp;  &nbsp; 
                   <span>
-                    <a onClick={() => deleteFromCart(item.product_id)} href="javascript:void(0)">
+                    <a onClick={() => {
+                        deleteFromCart(userInfo.token, item.product_id)
+                      }
+                      } href="javascript:void(0)">
                       <i className="fa fa-trash"></i>
                     </a>
                   </span></a>
@@ -71,6 +64,7 @@ const cartItems = useCartItems();
           </a>
         </div>
       </li>
+      }
     </ul>
     <form class="form-inline my-2 my-lg-0">
       {/* <input class="form-control mr-sm-2" type="search" placeholder="Search for a product" aria-label="Search"/> */}
@@ -79,7 +73,7 @@ const cartItems = useCartItems();
     </form>
   </div>
 </nav>
-        </>
+        
     )
 
 

@@ -1,51 +1,68 @@
 import { useEffect, useState } from "react";
+import {useAuth} from './Auth'
 
-let setOrders;
-let Orders;
+let setOrderItems = (order_items) =>{
+    orderItems = order_items
+}
+let orderItems = [];
 
-export const useOrders = () =>{
-    const [_Orders, _setOrders] = useState({})
-    Orders = _Orders;
-    setOrders = _setOrders;
+export const useOrderItems = () =>{
+    const userInfo = useAuth();
+    const [_orderItems, _setOrderItems] = useState(orderItems)
+    orderItems = _orderItems;
+    setOrderItems = _setOrderItems;
     
-    useEffect(() => {
-        const localOrders = getOrders();
-        setOrders(localOrders);
-    },[])
+    useEffect(async () => {
+        if(userInfo !== null)
+        {
+            const {token} = userInfo
+            if(token)
+            {
+                const localOrderItems = await getOrderItems(token);
+                setOrderItems(localOrderItems);
+            }
+        }
+    },[userInfo])
     
-    return Object.values(Orders);
+    return Object.values(orderItems);
 }
 
-export const getOrders = () =>{
-    return fetch('/getOrderForUser')
-            .then((res) => res.json())
-            .catch((err) => {
-                console.log('Error fetching the products',err)
-                return [];
-            })
-    
-    const localOrders = JSON.parse(localStorage.getItem("cartData")) || {};
-    
-    return localOrders;
+export const getOrderItems = async (token) =>{
+    const res = await fetch('/api/getOrdersForUser',
+    {
+        headers: {
+            token,
+            'Content-type': 'Application/json'
+        }
+    })
+    const {order, success} = await res.json();
+    if(success)
+    {
+        return order;
+    }
+    return [];
 }
 
 
-export const addToCart = (productInfo) =>{
-    const localOrders = {...Orders}
+export const addToOrder = async (token, product_info) =>{
+    const finalOrderItems = [...orderItems, product_info];
+    const itemIds = finalOrderItems.map((orderItem) => ({ item_id: orderItem.product_id, date:new Date().toISOString().split("T")[0] }))
 
-    localOrders[productInfo.product_id] = productInfo;
-    
-    localStorage.setItem("cartData", JSON.stringify(localOrders));
-    setOrders(localOrders);
-}
+    console.info('final Order Items , ItemIds, Token', finalOrderItems, itemIds, token)
+    const res = await fetch('/api/placeOrder',
+    {
+        method: 'POST',
+        headers: {
+            token,
+            'Content-type': 'Application/json'
+        },
+        body: JSON.stringify(itemIds)
 
-export const deleteFromCart = (id) =>{
-
-    const localOrders = {...Orders}
-
-    delete localOrders[id]
-    
-    localStorage.setItem("cartData", JSON.stringify(localOrders));
-    setOrders(localOrders);
+    })
+    const {success} = await res.json();
+    if(success)
+    {
+        setOrderItems(finalOrderItems);
+    }
 }
 

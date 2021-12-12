@@ -2,19 +2,25 @@ import React from 'react';
 import '../container/Container'
 import './styles.css'
 
-const Ocard = (props) =>{
+const Ocard = ({
+    date,
+    description,
+    name,
+    imglink,
+    price
+}) =>{
 
     return(
         <>
             <div class="card-outer">
                 <div class="card-inner">
                     <div>
-                        <img src="https://picsum.photos/120/120"></img>
+                        <img src={imglink} height="120" width="120"></img>
                     </div>
                     <div>
-                        <h5>Some Product Name</h5>
-                        <h6>Total: Rs. 250</h6>
-                        <p>Date: 12th December 2021</p>
+                        <h5>{name}</h5>
+                        <h6>Total: Rs. {price}</h6>
+                        <p>Date: {date}</p>
                         <p>Order Status: Delivered</p>
                     </div>
                 </div>

@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import {toast} from 'react-toastify'
+
 import PageHeading from '../../components/pageheading/PageHeading';
+import {login} from '../../utils/Auth'
+
 import './styles.css'
 
-
 const Login = () =>{
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isAdmin, setIsAdmin] = useState(false)
@@ -21,8 +23,21 @@ const Login = () =>{
 
     const handleSubmit = event => {
         event.preventDefault();
-        //Code
-        
+    
+        login(email, password, isAdmin)
+            .then((loginSuccess) => {
+                if(loginSuccess)
+                {
+                    setEmail('')
+                    setPassword('')
+                    setIsAdmin(false)
+                    toast('Login Successful !')
+                }
+                else
+                {
+                    toast('Login Failed !')
+                }
+            })
     };
 
 
@@ -34,15 +49,15 @@ const Login = () =>{
                 <form onSubmit={handleSubmit} >
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input onChange={handleEmailChange} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                        <input onChange={handleEmailChange} type="email" class="form-control" placeholder="Enter email" value={email}/>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input onChange={handlePasswordChange} type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                        <input onChange={handlePasswordChange} type="password" class="form-control" placeholder="Password" value={password}/>
                     </div>
                     <div class="form-check">
-                        <input onChange={handleIsAdminChange} type="checkbox" class="form-check-input" id="exampleCheck1"/>
+                        <input onChange={handleIsAdminChange} type="checkbox" class="form-check-input" checked={isAdmin}/>
                         <label class="form-check-label" for="exampleCheck1">I am an Admin</label>
                     </div>
                     

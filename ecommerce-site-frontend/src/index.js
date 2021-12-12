@@ -12,10 +12,21 @@ import UserProfile from './pages/userprofile/UserProfile';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login'
 import AdminPanel from './pages/adminpanel/AdminPanel';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.Fragment>
-      <Navbar user_name={"Arunav Dey"}/>
+    
+      <Navbar/>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div>
         <Router>
           <Switch>
