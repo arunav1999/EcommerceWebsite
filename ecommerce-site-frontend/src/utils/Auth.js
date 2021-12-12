@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 
 let setUser = (userInfo) => {
-    user = userInfo;
+    
 };
-let user = null;
 
 export const useAuth = () =>{
-    const [_user, _setUser] = useState(user)
-    user = _user;
-    setUser = _setUser;
-
+    const [_user, _setUser] = useState(null)
+    setUser = _setUser
     useEffect(async () => {
-        if(user === null)
+        if(_user === null)
         {
             const localUser = await getUserData();
             _setUser(localUser);
@@ -41,6 +38,7 @@ const getUserData = async () =>{
 
     if(success)
     { 
+        localStorage.setItem('userInfo',JSON.stringify(user_info))
         return {...user_info, token};
     }
     return null;
@@ -99,4 +97,12 @@ export const signup = async (userInfo) =>{
         return await login(userInfo.email, userInfo.password)
     }
     return false;
+}
+
+export const logout = () =>{
+    setUser(null)
+    localStorage.removeItem('userToken')
+    localStorage.removeItem('userInfo')
+    window.location.reload()
+    window.location.href = '/login'
 }

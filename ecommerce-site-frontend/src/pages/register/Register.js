@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
+import {useHistory} from 'react-router-dom';
 
 import PageHeading from '../../components/pageheading/PageHeading';
 import {signup} from '../../utils/Auth'
@@ -26,7 +27,7 @@ const Register = () =>{
         address,
         password
     } = userInfo
-
+    const history = useHistory()
     const handleChange = (event) =>{
         const localUserInfo = {...userInfo, [event.target.name]: event.target.value}
 
@@ -44,6 +45,7 @@ const Register = () =>{
                     {
                         setUserInfo(defaultUserInfo)
                         toast('Registration successful');
+                        window.location.href = '/plp'
                     }
                     else
                     {

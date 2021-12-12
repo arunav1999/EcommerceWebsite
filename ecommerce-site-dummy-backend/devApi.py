@@ -80,7 +80,7 @@ def getproductById(items_id):
         item['description']=Item.description
         output.append(item)
     if output:    
-        return jsonify(output)
+        return jsonify(output[0])
     else:
         return jsonify({'success':False,'message':'item_id is not present'}) 
 
@@ -121,6 +121,7 @@ def getOrdersForUser():
                 obj['imglink']=item.image_link
                 obj['description']=item.description
                 obj['date']=order.date
+                obj['product_id']=item.id
                 output.append(obj)
             return jsonify({"success":True, "order":output})
         else:
@@ -165,9 +166,9 @@ def createNewProduct():
         if admin_check:
             data=request.get_json()
             #val = Items(name=data['name'],price=data['price'],image_link=data['imglink'],description=data['description'])
-            i_id = Items.query.filter_by(name=data['name'],price=data['price'],image_link=data['imglink'],description=data['description']).first()
+            i_id = Items.query.filter_by(name=data['pname'],price=data['price'],image_link=data['imglink'],description=data['description']).first()
             if not i_id:
-                entry = Items(name=data['name'],price=data['price'],image_link=data['imglink'],description=data['description'])
+                entry = Items(name=data['pname'],price=data['price'],image_link=data['imglink'],description=data['description'])
                 db.session.add(entry)
                 db.session.commit()
                 return jsonify({'success':True,'message':'item added successfully'})

@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 import {useAuth} from './Auth'
-
+import {toast} from 'react-toastify'
 let setOrderItems = (order_items) =>{
     orderItems = order_items
 }
 let orderItems = [];
 
-export const useOrderItems = () =>{
-    const userInfo = useAuth();
-    const [_orderItems, _setOrderItems] = useState(orderItems)
-    orderItems = _orderItems;
-    setOrderItems = _setOrderItems;
+// export const useOrderItems = () =>{
+//     const userInfo = useAuth();
+//     const [_orderItems, _setOrderItems] = useState(orderItems)
+//     orderItems = _orderItems;
+//     setOrderItems = _setOrderItems;
     
-    useEffect(async () => {
-        if(userInfo !== null)
-        {
-            const {token} = userInfo
-            if(token)
-            {
-                const localOrderItems = await getOrderItems(token);
-                setOrderItems(localOrderItems);
-            }
-        }
-    },[userInfo])
+//     useEffect(async () => {
+//         if(userInfo !== null)
+//         {
+//             const {token} = userInfo
+//             if(token)
+//             {
+//                 const localOrderItems = await getOrderItems(token);
+//                 setOrderItems(localOrderItems);
+//             }
+//         }
+//     },[userInfo])
     
-    return Object.values(orderItems);
-}
+//     return Object.values(orderItems);
+// }
 
 export const getOrderItems = async (token) =>{
     const res = await fetch('/api/getOrdersForUser',
@@ -44,11 +44,13 @@ export const getOrderItems = async (token) =>{
 }
 
 
-export const addToOrder = async (token, product_info) =>{
-    const finalOrderItems = [...orderItems, product_info];
-    const itemIds = finalOrderItems.map((orderItem) => ({ item_id: orderItem.product_id, date:new Date().toISOString().split("T")[0] }))
-
-    console.info('final Order Items , ItemIds, Token', finalOrderItems, itemIds, token)
+export const addToOrder = async (token, ids) =>{
+    const preparedData = ids.map((id) => {
+        return {
+            item_id:id,
+            date: Date.now()
+        }
+    })
     const res = await fetch('/api/placeOrder',
     {
         method: 'POST',
@@ -56,13 +58,14 @@ export const addToOrder = async (token, product_info) =>{
             token,
             'Content-type': 'Application/json'
         },
-        body: JSON.stringify(itemIds)
+        body: JSON.stringify(preparedData)
 
     })
     const {success} = await res.json();
     if(success)
     {
-        setOrderItems(finalOrderItems);
+        toast('Order Successfully Placed !')
+        //setOrderItems(finalOrderItems);
     }
 }
 

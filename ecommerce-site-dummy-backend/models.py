@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:abcABC123@localho
 db = SQLAlchemy(app)
 
 #Price is in Integer in items
-#There is no admin register
+#There is no admin
 
 class Customers(db.Model):
     # you can even specify the table name with which you are working.

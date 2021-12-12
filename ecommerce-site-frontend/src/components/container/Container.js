@@ -2,23 +2,28 @@ import React from 'react';
 import '../container/styles.css'
 import Ccard from '../ccard/Ccard';
 import Ocard from '../ocard/Ocard';
+import { addToOrder } from '../../utils/Orders';
+import { useAuth } from '../../utils/Auth';
 
 const Container = ({
-    orderItems
-}) =>{
+    orderItems,
+    setOrders
+}) => {
+    const content = []
+    orderItems.map((orderItem) => {
+        content.push(<Ocard {...orderItem}/>)
+    });
 
-    
-    return(
+
+    return (
         <>
-           <div className="container">
-               <div>
-               {
-                    orderItems.map((orderItem) => {
-                        return <Ocard {...orderItem} />
-                    })
-                   }
-               </div>
-            </div> 
+            <div className="container">
+                <div>
+                    {
+                        content
+                    }
+                </div>
+            </div>
         </>
     )
 }

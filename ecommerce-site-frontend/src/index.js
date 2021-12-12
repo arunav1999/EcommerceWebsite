@@ -14,53 +14,61 @@ import Login from './pages/login/Login'
 import AdminPanel from './pages/adminpanel/AdminPanel';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './components/privateroute/PrivateRoute'
+import { useAuth } from './utils/Auth';
 
+const MainComponent = () => {
+  const userInfo = useAuth();
+  console.info('IN MAIN COMPONENT', userInfo)
+  return(
+    <React.Fragment>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
+    <div>
+      <Router>
+        <Navbar/>
+        <Switch>
+          <Route path='/storefront'>
+            <Storefront/>
+          </Route>
+          <Route userInfo={userInfo} path='/orders'>
+            <Orders/>
+          </Route>
+          <Route path='/plp'>
+            <Plp/>
+          </Route>
+          <Route userInfo={userInfo} path='/cart'>
+            <Cart/>
+          </Route>
+          <Route path='/pdp'>
+            <Pdp/>
+          </Route>
+          <Route userInfo={userInfo} path='/profile'>
+            <UserProfile/>
+          </Route>
+          <Route path='/login'>
+            <Login/>
+          </Route>
+          <Route path='/register'>
+            <Register/>
+          </Route>
+          <Route path='/admin'>
+            <AdminPanel/>
+          </Route>
+        </Switch>
+      </Router>
+      </div>
+</React.Fragment>
+  )
+} 
 ReactDOM.render(
-  <React.Fragment>
-    
-      <Navbar/>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <div>
-        <Router>
-          <Switch>
-            <Route path='/storefront'>
-              <Storefront/>
-            </Route>
-            <Route path='/orders'>
-              <Orders/>
-            </Route>
-            <Route path='/plp'>
-              <Plp/>
-            </Route>
-            <Route path='/cart'>
-              <Cart/>
-            </Route>
-            <Route path='/pdp'>
-              <Pdp/>
-            </Route>
-            <Route path='/profile'>
-              <UserProfile/>
-            </Route>
-            <Route path='/login'>
-              <Login/>
-            </Route>
-            <Route path='/register'>
-              <Register/>
-            </Route>
-            <Route path='/admin'>
-              <AdminPanel/>
-            </Route>
-          </Switch>
-        </Router>
-        </div>
-  </React.Fragment>,
+  <MainComponent/>,
   document.getElementById('root')
 );
 

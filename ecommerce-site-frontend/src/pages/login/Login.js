@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {toast} from 'react-toastify'
+import {useHistory, useLocation} from 'react-router-dom';
 
 import PageHeading from '../../components/pageheading/PageHeading';
-import {login} from '../../utils/Auth'
+import {login,useAuth} from '../../utils/Auth'
 
 import './styles.css'
 
@@ -10,7 +11,10 @@ const Login = () =>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isAdmin, setIsAdmin] = useState(false)
+    const history = useHistory()
     
+    
+
     const handleEmailChange = event => {
         setEmail(event.target.value)
     };
@@ -32,12 +36,23 @@ const Login = () =>{
                     setPassword('')
                     setIsAdmin(false)
                     toast('Login Successful !')
+                    window.location.reload()
+                    if(isAdmin)
+                    {
+                        window.location.href = '/admin'
+                    }
+                    else
+                    {
+                        window.location.href = '/plp'
+                    }
+                    
                 }
                 else
                 {
                     toast('Login Failed !')
                 }
             })
+
     };
 
 

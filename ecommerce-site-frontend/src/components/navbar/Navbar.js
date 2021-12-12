@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import {NavLink as Link} from 'react-router-dom'
 import './styles.css'
 import Autosuggest from 'react-autosuggest';
 import Searchbar from '../searchbar/Searchbar';
 import { deleteFromCart, useCartItems} from '../../utils/Cart'; 
-import { useAuth } from '../../utils/Auth'; 
+import { useAuth, logout } from '../../utils/Auth'; 
 
 const Navbar = (props) => {
 const userInfo = useAuth();
-console.info('USer Info in Navbar', userInfo)
 const cartItems = useCartItems();
 
     return(
@@ -34,11 +34,24 @@ const cartItems = useCartItems();
           <a class="dropdown-item" href="/cart">Cart</a>
           <a class="dropdown-item" href="/orders">Orders</a>
           <a class="dropdown-item" href="/profile">Profile</a>
-          <a class="dropdown-item" href="/signout">Signout</a>
+          <button onClick={logout} class="dropdown-item">Signout</button>
           
         </div>
       </li>
       }
+      {
+        userInfo === null &&
+        <li class="nav-item active">
+          <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+        </li>
+      }
+      {
+        userInfo === null &&
+        <li class="nav-item active">
+          <a class="nav-link" href="/register">Sign Up <span class="sr-only">(current)</span></a>
+        </li>
+      }
+      
       {userInfo !== null &&
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

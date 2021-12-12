@@ -1,8 +1,10 @@
 import React from 'react';
 import PageHeading from '../../components/pageheading/PageHeading';
 import '../userprofile/styles.css'
+import {useAuth} from '../../utils/Auth'
 
 const UserProfile = () =>{
+    const userInfo = useAuth();
 
     return(
         <>
@@ -13,10 +15,10 @@ const UserProfile = () =>{
                 </div>
             </div>
             <div>
-                <PageHeading content={"Name: Arunav Dey "}/>
-                <PageHeading content={"Email: arunav.dey.7@gmail.com"}/>
-                <PageHeading content={"Contact: 9870794470"}/>
-                <PageHeading content={"Address: 240 Gyani Colony, Linepar, Moradabad, 244001"}/>
+                <PageHeading content={"Name:" + JSON.parse(localStorage.getItem('userInfo')).name}/>
+                <PageHeading content={"Email:" + JSON.parse(localStorage.getItem('userInfo')).email}/>
+                <PageHeading content={"Contact:" + JSON.parse(localStorage.getItem('userInfo')).contact}/>
+                <PageHeading content={"Address:" + JSON.parse(localStorage.getItem('userInfo')).address}/>
             </div>
 
         </>
