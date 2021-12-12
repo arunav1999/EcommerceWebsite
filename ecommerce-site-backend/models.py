@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost/testdb"
 db = SQLAlchemy(app)
 
+#Price is in Integer in items
+#There is no admin register
 
 class Customers(db.Model):
     # you can even specify the table name with which you are working.
@@ -24,7 +26,7 @@ class Items(db.Model):
     __tablename__ = 'items'
     id = db.Column(db.Integer, primary_key = True, unique=True, nullable=False)
     name = db.Column(db.String(100), unique=False, nullable=False)
-    price=db.Column(db.Integer, unique=False, nullable=False)
+    price=db.Column(db.Integer, unique=False, nullable=False)  
     image_link=db.Column(db.String(300), unique=False, nullable=False)
     description=db.Column(db.String(100), unique=False, nullable=True)
 
@@ -67,5 +69,4 @@ class Admin_Login(db.Model):
     id = db.Column(db.Integer, primary_key = True, unique=True, nullable=False) 
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(500), unique = False, nullable=False)
-
 
