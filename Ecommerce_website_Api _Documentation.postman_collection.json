@@ -1,0 +1,923 @@
+{
+	"info": {
+		"_postman_id": "b0b632a2-0bb6-4b27-91c3-de75ecf79056",
+		"name": "Ecommerce_website_Api _Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": " http://127.0.0.1:7000/api/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \"name\":\"Vedika\",    \"email\":\"vedika@gmail.com\",    \"password\":\"vedika\",\n    \"contact\":\"6767656767\",    \"address\":\"Delhi\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"register"
+					]
+				},
+				"description": "Customer Register"
+			},
+			"response": [
+				{
+					"name": "Register Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Vedika\",    \"email\":\"vedika@gmail.com\",    \"password\":\"vedika\",    \"contact\":\"6767656767\",    \"address\":\"Delhi\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "63"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 07:41:57 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"message\": \"Registration Successful\",    \"success\": true}"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \"email\":\"vedika@gmail.com\",    \"password\":\"vedika\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Customer Login"
+			},
+			"response": [
+				{
+					"name": "Customer Login Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"email\":\"vedika@gmail.com\",    \"password\":\"vedika\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "351"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 07:43:04 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"success\": true,    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo\",\n    \"user_info\": {\n        \"address\": \"Delhi\",        \"contact\": \"6767656767\",        \"email\": \"vedika@gmail.com\",\n        \"name\": \"Vedika\"    }}"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/adminlogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \"email\":\"admin@gmail.com\",    \"password\":\"admin\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/adminlogin",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"adminlogin"
+					]
+				},
+				"description": "Admin Login"
+			},
+			"response": [
+				{
+					"name": "Admin Login Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"email\":\"admin@gmail.com\",    \"password\":\"admin\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/adminlogin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"adminlogin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "181"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 07:43:57 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"success\": true,    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiYWRtaW4ifQ.6ElIjKH9gMagZRYal0aCd3l3q5vCf1y8hBM03ldGT1w\"}"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/getproductById/<int:items_id>",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/getproductById/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"getproductById",
+						"2"
+					]
+				},
+				"description": "Get Product By Item_id"
+			},
+			"response": [
+				{
+					"name": "Get Product By Item Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/getproductById/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"getproductById",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "283"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 08:45:19 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[    {        \"description\": \"Very good Quality\",        \"id\": 2,        \"imglink\": \"https://media.istockphoto.com/photos/with-two-clipping-paths-picture-id173240143?k=20&m=173240143&s=612x612&w=0&h=yukXLfScWLEgiYn3xwW_Tfxl3VVGGjB_C6a4Rpsg22M=\",        \"name\": \"TV\",        \"price\": 11000    }]"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/getproducts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/getproducts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"getproducts"
+					]
+				},
+				"description": "Get  All Products"
+			},
+			"response": [
+				{
+					"name": "Get All Products",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/getproducts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"getproducts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "632"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 08:48:47 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[    {        \"description\": \"Very good Quality\",        \"id\": 2,        \"imglink\": \"https://media.istockphoto.com/photos/with-two-clipping-paths-picture-id173240143?k=20&m=173240143&s=612x612&w=0&h=yukXLfScWLEgiYn3xwW_Tfxl3VVGGjB_C6a4Rpsg22M=\",        \"name\": \"TV\",        \"price\": 11000    },    {        \"description\": \"very good\",        \"id\": 1,        \"imglink\": \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lg.com%2Fin%2Fwashing-machines%2Flg-fhm1208zdl&psig=AOvVaw18Ao1vfpY1NzzS8-fPcmur&ust=1639385237904000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjfmYjw3fQCFQAAAAAdAAAAABAD\",        \"name\": \"washing-machine\",       \"price\": 6777    }]"
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:7000/api/getOrdersForUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/getOrdersForUser",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"getOrdersForUser"
+					]
+				},
+				"description": "Get Orders For User"
+			},
+			"response": [
+				{
+					"name": "Get Order for Authenticate Customer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/getOrdersForUser",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"getOrdersForUser"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "366"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 08:49:33 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"order\": [        {            \"date\": \"Sun, 12 Dec 2021 00:00:00 GMT\",            \"description\": \"Very good Quality\",            \"imglink\": \"https://media.istockphoto.com/photos/with-two-clipping-paths-picture-id173240143?k=20&m=173240143&s=612x612&w=0&h=yukXLfScWLEgiYn3xwW_Tfxl3VVGGjB_C6a4Rpsg22M=\",            \"name\": \"TV\",            \"price\": 11000        }    ],    \"success\": true}"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/getCartItemsForUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/getCartItemsForUser",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"getCartItemsForUser"
+					]
+				},
+				"description": "Get Cart Items For User"
+			},
+			"response": [
+				{
+					"name": "Get User's Cart item",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/getCartItemsForUser",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"getCartItemsForUser"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "317"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 08:14:39 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"cart\": [        {            \"description\": \"Very good Quality\",            \"imglink\": \"https://media.istockphoto.com/photos/with-two-clipping-paths-picture-id173240143?k=20&m=173240143&s=612x612&w=0&h=yukXLfScWLEgiYn3xwW_Tfxl3VVGGjB_C6a4Rpsg22M=\",            \"name\": \"TV\",            \"price\": 11000        }    ],    \"success\": true}"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/createNewProduct",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiYWRtaW4ifQ.6ElIjKH9gMagZRYal0aCd3l3q5vCf1y8hBM03ldGT1w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \"name\":\"TV\",    \"price\":\"11000\",    \"imglink\":\"https://media.istockphoto.com/photos/with-two-clipping-paths-picture-id173240143?k=20&m=173240143&s=612x612&w=0&h=yukXLfScWLEgiYn3xwW_Tfxl3VVGGjB_C6a4Rpsg22M=\",    \"description\":\"Very good Quality\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/createNewProduct",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"createNewProduct"
+					]
+				},
+				"description": "Create new Product By Admin"
+			},
+			"response": [
+				{
+					"name": "Add new Product By Admin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiYWRtaW4ifQ.6ElIjKH9gMagZRYal0aCd3l3q5vCf1y8hBM03ldGT1w",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"name\":\"TV\",    \"price\":\"11000\",    \"imglink\":\"https://media.istockphoto.com/photos/with-two-clipping-paths-picture-id173240143?k=20&m=173240143&s=612x612&w=0&h=yukXLfScWLEgiYn3xwW_Tfxl3VVGGjB_C6a4Rpsg22M=\",    \"description\":\"Very good Quality\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/createNewProduct",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"createNewProduct"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "63"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 07:52:18 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"message\": \"item added successfully\",    \"success\": true}"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/updateCart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[    {    \"item_id\":\"2\" }]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/updateCart",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"updateCart"
+					]
+				},
+				"description": "Update Cart By User"
+			},
+			"response": [
+				{
+					"name": "Add Item To cart",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[    {    \"item_id\":\"2\" }]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/updateCart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"updateCart"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 08:13:29 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"message\": \"cart updated successfully\",    \"success\": true}"
+				}
+			]
+		},
+		{
+			"name": " http://127.0.0.1:7000/api/placeOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[    {        \"item_id\":\"2\"    }]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7000/api/placeOrder",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"placeOrder"
+					]
+				},
+				"description": "Place Order By User"
+			},
+			"response": [
+				{
+					"name": "Place Order For Customer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InZlZGlrYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6ImYyNWRjNTI3ZGY3NmQzZGU3ZmQ1NGY3ODVjNzM2ZDVjIn0.h9PfoRk5Xi11np6lmzBbRFUW4vKqFTMx9_WJsBnxTHo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[    {        \"item_id\":\"2\"    }]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7000/api/placeOrder",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7000",
+							"path": [
+								"api",
+								"placeOrder"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.16.1 Python/3.8.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Dec 2021 08:19:35 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{    \"message\": \"Order placed successfully\",    \"success\": true}"
+				}
+			]
+		}
+	]
+}
