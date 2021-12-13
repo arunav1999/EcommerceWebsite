@@ -51,7 +51,7 @@ The application will launch click on Home on the Nav bar.
 
 Additional links:
 
-Video Demo:
+# Video Demo:
 
 User Registration Demo:
 https://tinyurl.com/257jd2vv
