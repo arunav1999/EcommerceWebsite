@@ -10,6 +10,14 @@ import {useAuth} from '../../utils/Auth'
 const Cart = (props) =>{
     const cartItems = useCartItems();
     const userInfo = useAuth();
+    if(userInfo === null)
+    {
+        return (
+            <>
+                <PageHeading content={"You need to Login first !"}/>
+            </>
+        )
+    }
 
     return(
         <React.Fragment>

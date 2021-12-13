@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../pcard/styles.css'
 import { addToCart } from '../../utils/Cart';
 import { useAuth } from '../../utils/Auth'; 
+import { toast } from 'react-toastify';
 
 const Pcard = ({
     product_id,
@@ -12,6 +13,12 @@ const Pcard = ({
 }) => {
 const userInfo = useAuth()
 const addDataToCart = () =>{
+    if(userInfo === null)
+    {
+        window.location.href = '/login'
+        toast("Kindly login first")
+        toast("Kindly login first")
+    }
     const productInfo = {
         product_id,
         price,

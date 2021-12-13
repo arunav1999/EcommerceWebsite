@@ -37,9 +37,11 @@ const MainComponent = () => {
           <Route path='/storefront'>
             <Storefront/>
           </Route>
+          
           <Route userInfo={userInfo} path='/orders'>
             <Orders/>
           </Route>
+          
           <Route path='/plp'>
             <Plp/>
           </Route>

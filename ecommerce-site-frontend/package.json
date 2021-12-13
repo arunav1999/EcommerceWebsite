@@ -1,6 +1,6 @@
 {
   "name": "ecommerce-site-frontend",
-  "proxy":"http://127.00",
+  "proxy": "http://3.94.121.41/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

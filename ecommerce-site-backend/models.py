@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:abcABC123@localhost/ecomdev"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:abc123@localhost/ecomdev"
 db = SQLAlchemy(app)
 
 #Price is in Integer in items
