@@ -32,6 +32,10 @@ export const addProducts = async (pname, price, imglink, description, token) =>{
     {
         toast('Product Added Successfully !')
     }
+    else
+    {
+        toast('Product Not Added!')
+    }
 }
 
 export const getProductForId = (product_id) =>{

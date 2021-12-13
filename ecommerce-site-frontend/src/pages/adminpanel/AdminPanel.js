@@ -10,6 +10,16 @@ const AdminPanel = () =>{
     const [imglink, setImgLink] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
+
+    if(localStorage.getItem('userToken') === null)
+    {
+        return (
+            <>
+                <PageHeading content={"You need to Login first !"}/>
+            </>
+        )
+    }
+
     
     const handleProductName = event => {
         setPname(event.target.value)
@@ -27,6 +37,7 @@ const AdminPanel = () =>{
         event.preventDefault();
         addProducts(pname,price,imglink,description,localStorage.getItem('userToken'))
     };
+
 
 
     return(
@@ -58,7 +69,7 @@ const AdminPanel = () =>{
             </div>
             
         </div>
-        <button onClick = {logout}>Logout</button>
+        <button onClick = {logout} type="button" class="btn btn-danger">Logout</button>
         </>
         
     )

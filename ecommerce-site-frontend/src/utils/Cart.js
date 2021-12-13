@@ -93,20 +93,20 @@ export const deleteFromCart = async (token, id) =>{
     return [];
 }
 
-export const getCartTotal = async (token) =>{
-    const res = await fetch('/api/getCartTotalForUser',
-    {
-        method: 'GET',
-        headers: {
-            token,
-            'Content-type': 'Application/json'
-        }
-    })
-    const {success, total} = await res.json();
-    if(success)
-    {
-        return JSON.parse(total);
-    }
-    return 0;
-}
+
+// export const getCartTotal = () =>{
+//     const [cartTotal, setCartTotal] = useState(0);
+   
+//     fetch('/api/getCartTotalForUser',
+//     {
+//         method: 'GET',
+//         headers: {
+//             token: localStorage.getItem('userToken'),
+//             'Content-type': 'Application/json'
+//         }
+//     })
+//         .then(res => res.json())
+//         .then(res => setCartTotal(res.total))
+//     return cartTotal
+// }
 

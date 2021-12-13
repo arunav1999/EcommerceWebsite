@@ -4,7 +4,6 @@ import '../container/styles.css'
 import Ccard from '../ccard/Ccard';
 import { useAuth } from '../../utils/Auth';
 import { addToOrder } from '../../utils/Orders'
-import {getCartTotal} from '../../utils/Cart'
 import PageHeading from '../pageheading/PageHeading';
 
 // const userInfo = null;
@@ -19,11 +18,9 @@ import PageHeading from '../pageheading/PageHeading';
 const CContainer = ({
     cartItems
 }) =>{
-    const total = getCartTotal()
     return(
         <>
            <div className="container">
-               <PageHeading content={"Cart Total: Rs." + total}/>
                <div>
                    {
                     cartItems.map((cartItem) => {

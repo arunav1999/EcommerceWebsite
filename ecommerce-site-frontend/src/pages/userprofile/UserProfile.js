@@ -5,6 +5,15 @@ import {useAuth} from '../../utils/Auth'
 
 const UserProfile = () =>{
     const userInfo = useAuth();
+    if(userInfo === null)
+    {
+        return (
+            <>
+                <PageHeading content={"You need to Login first !"}/>
+            </>
+        )
+    }
+
 
     return(
         <>
