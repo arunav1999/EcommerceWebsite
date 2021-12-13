@@ -7,6 +7,9 @@ import '../../pages/cart/styles.css'
 import {addToOrder} from '../../utils/Orders'
 import {useAuth} from '../../utils/Auth'
 
+
+
+
 const Cart = (props) =>{
     const cartItems = useCartItems();
     const userInfo = useAuth();
@@ -18,11 +21,10 @@ const Cart = (props) =>{
             </>
         )
     }
-
     return(
         <React.Fragment>
             <PageHeading content={"All Cart Items"}/>
-            <PageHeading content={"Total Cost: Rs.45647356"}/>
+            <PageHeading content={"Total Cost: Rs."}/>
             <div className="cart_page_container">
                 <CContainer cartItems={cartItems}/>
                 {
