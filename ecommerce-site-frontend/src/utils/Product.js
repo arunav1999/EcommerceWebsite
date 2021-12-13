@@ -39,10 +39,9 @@ export const addProducts = async (pname, price, imglink, description, token) =>{
 }
 
 export const getProductForId = (product_id) =>{
-    return fetch('/api/getproductById/'+product_id)
+    var receivedProduct = {}
+    fetch('/api/getproductById/'+product_id)
             .then((res) => res.json())
-            .catch((err) => {
-                console.log('Error fetching the products',err)
-                return [];
-            })
+            .then((res) => console.log(res))
+    return receivedProduct;
 }

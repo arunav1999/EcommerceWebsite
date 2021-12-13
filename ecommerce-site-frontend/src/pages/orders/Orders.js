@@ -18,7 +18,7 @@ const Orders = (props) => {
         }
     }, [userInfo])
 
-    if(userInfo === null)
+    if(localStorage.getItem('userToken') === null)
     {
         return (
             <>

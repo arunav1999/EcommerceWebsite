@@ -61,7 +61,7 @@ export const addToCart = async (token, product_info) =>{
     })
     const {success} = await res.json();
     if(success)
-    {
+    {   getCartTotal()
         setCartItems(finalCartItems);
     }
 }
@@ -87,26 +87,25 @@ export const deleteFromCart = async (token, id) =>{
     })
     const {success} = await res.json();
     if(success)
-    {
+    {   getCartTotal()
         setCartItems(finalCartItems);
     }
     return [];
 }
 
 
-// export const getCartTotal = () =>{
-//     const [cartTotal, setCartTotal] = useState(0);
-   
-//     fetch('/api/getCartTotalForUser',
-//     {
-//         method: 'GET',
-//         headers: {
-//             token: localStorage.getItem('userToken'),
-//             'Content-type': 'Application/json'
-//         }
-//     })
-//         .then(res => res.json())
-//         .then(res => setCartTotal(res.total))
-//     return cartTotal
-// }
+export const getCartTotal = () =>{
+    
+    fetch('/api/getCartTotalForUser',
+    {
+        method: 'GET',
+        headers: {
+            token: localStorage.getItem('userToken'),
+            'Content-type': 'Application/json'
+        }
+    })
+    .then((res) => res.json())
+    .then((res) => localStorage.setItem('cartTotal',res.total))
+    
+}
 
