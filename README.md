@@ -36,6 +36,8 @@ Documentation.
 
 Deployment.
 
+PS: The scope was decided and fixed taking account the time alloted for the assignment, more features such as quantity, stocks, availability could be added in the future.
+
 # Here we have put any additional instructions/commands required to run the backend and frontend.
 
 For running the frontend:
