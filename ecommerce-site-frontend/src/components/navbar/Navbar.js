@@ -3,7 +3,7 @@ import {NavLink as Link} from 'react-router-dom'
 import './styles.css'
 import Autosuggest from 'react-autosuggest';
 import Searchbar from '../searchbar/Searchbar';
-import { deleteFromCart, useCartItems} from '../../utils/Cart'; 
+import { deleteFromCart, getCartTotal, useCartItems} from '../../utils/Cart'; 
 import { useAuth, logout } from '../../utils/Auth'; 
 
 const Navbar = (props) => {
@@ -73,7 +73,7 @@ const cartItems = useCartItems();
                   
           })}
           <a href="/cart">
-            <button type="button" class="btn btn-success">Checkout</button>
+            <button onClick={getCartTotal()} type="button" class="btn btn-success">Checkout</button>
           </a>
         </div>
       </li>

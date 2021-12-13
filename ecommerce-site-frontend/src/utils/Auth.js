@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {getCartTotal} from '../utils/Cart'
 
 let setUser = (userInfo) => {
     
@@ -103,6 +104,7 @@ export const logout = () =>{
     setUser(null)
     localStorage.removeItem('userToken')
     localStorage.removeItem('userInfo')
+    localStorage.removeItem('cartTotal')
     window.location.reload()
     window.location.href = '/login'
 }

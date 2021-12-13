@@ -5,7 +5,7 @@ import {useAuth} from '../../utils/Auth'
 
 const UserProfile = () =>{
     const userInfo = useAuth();
-    if(userInfo === null)
+    if(localStorage.getItem('userToken') === null)
     {
         return (
             <>
