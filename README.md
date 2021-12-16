@@ -66,8 +66,3 @@ https://tinyurl.com/37p62bd6
 
 # PS: The Backend is already deployed on an AWS EC2 instance, so no need to setup/configure the backend.
 
-# Contributors:
-Arunav Dey, 
-Prashasht Bhatnagar, 
-Twinkle Mittal, 
-Shubhanshu Keshari
